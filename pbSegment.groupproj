@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{03D48461-C369-4D8B-9D95-C9B18CB3EA97}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ProgressBarSegmented.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Demo.dproj">
+            <Dependencies>ProgressBarSegmented.dproj</Dependencies>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ProgressBarSegmented">
+        <MSBuild Projects="ProgressBarSegmented.dproj"/>
+    </Target>
+    <Target Name="ProgressBarSegmented:Clean">
+        <MSBuild Projects="ProgressBarSegmented.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProgressBarSegmented:Make">
+        <MSBuild Projects="ProgressBarSegmented.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Demo" DependsOnTargets="ProgressBarSegmented">
+        <MSBuild Projects="Demo\Demo.dproj"/>
+    </Target>
+    <Target Name="Demo:Clean" DependsOnTargets="ProgressBarSegmented:Clean">
+        <MSBuild Projects="Demo\Demo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Demo:Make" DependsOnTargets="ProgressBarSegmented:Make">
+        <MSBuild Projects="Demo\Demo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ProgressBarSegmented;Demo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ProgressBarSegmented:Clean;Demo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ProgressBarSegmented:Make;Demo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

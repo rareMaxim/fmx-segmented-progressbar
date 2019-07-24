@@ -1,0 +1,124 @@
+object Form4: TForm4
+  Left = 0
+  Top = 0
+  Caption = 'Form4'
+  ClientHeight = 172
+  ClientWidth = 691
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object lyt1: TLayout
+    Padding.Left = 5.000000000000000000
+    Padding.Top = 1.000000000000000000
+    Padding.Right = 5.000000000000000000
+    Padding.Bottom = 1.000000000000000000
+    Position.X = 392.000000000000000000
+    Position.Y = 40.000000000000000000
+    Size.Width = 289.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object cmbclrbx1: TComboColorBox
+      Align = Right
+      Color = claGold
+      Position.X = 224.000000000000000000
+      Position.Y = 1.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+    object lbl1: TLabel
+      Align = Left
+      Position.X = 5.000000000000000000
+      Position.Y = 1.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      Text = #1054#1078#1080#1076#1072#1085#1080#1077
+      TabOrder = 1
+    end
+  end
+  object lyt2: TLayout
+    Padding.Left = 5.000000000000000000
+    Padding.Top = 1.000000000000000000
+    Padding.Right = 5.000000000000000000
+    Padding.Bottom = 1.000000000000000000
+    Position.X = 392.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 289.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object cmbclrbx2: TComboColorBox
+      Align = Right
+      Color = claSpringgreen
+      Position.X = 224.000000000000000000
+      Position.Y = 1.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+    object lbl2: TLabel
+      Align = Left
+      Position.X = 5.000000000000000000
+      Position.Y = 1.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      Text = #1043#1086#1090#1086#1074#1086
+      TabOrder = 1
+    end
+  end
+  object lyt3: TLayout
+    Padding.Left = 5.000000000000000000
+    Padding.Top = 1.000000000000000000
+    Padding.Right = 5.000000000000000000
+    Padding.Bottom = 1.000000000000000000
+    Position.X = 392.000000000000000000
+    Position.Y = 120.000000000000000000
+    Size.Width = 289.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object cmbclrbx3: TComboColorBox
+      Align = Right
+      Color = claMediumpurple
+      Position.X = 224.000000000000000000
+      Position.Y = 1.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+    object lbl3: TLabel
+      Align = Left
+      Position.X = 5.000000000000000000
+      Position.Y = 1.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      Text = #1042' '#1088#1072#1073#1086#1090#1077
+      TabOrder = 1
+    end
+  end
+  object btn1: TButton
+    Position.X = 288.000000000000000000
+    Position.Y = 120.000000000000000000
+    TabOrder = 4
+    Text = 'Start 60 task'
+    OnClick = btn1Click
+  end
+  object sgmntdprgrsbr1: TSegmentedProgresBar
+    Size.Width = 377.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+    Position.X = 8.000000000000000000
+    Position.Y = 24.000000000000000000
+    SegmentsCount = 100
+    DefaultColor = claBisque
+  end
+end
