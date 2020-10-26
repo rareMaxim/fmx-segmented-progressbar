@@ -27,9 +27,9 @@ type
     constructor Create(AOwner: TComponent); override;
     procedure AfterConstruction; override;
     procedure Clear;
-    property Segmet[Index: Integer]: TAlphaColor read GetSegmetColor
-      write SetSegmetColor; default;
+    property Segmet[Index: Integer]: TAlphaColor read GetSegmetColor write SetSegmetColor; default;
   published
+    property Align;
     property Height;
     property Width;
     property Size;
@@ -123,8 +123,7 @@ begin
   FSegmentsCount := Value;
 end;
 
-procedure TSegmentedProgresBar.SetSegmetColor(Index: Integer;
-  const Value: TAlphaColor);
+procedure TSegmentedProgresBar.SetSegmetColor(Index: Integer; const Value: TAlphaColor);
 begin
   if Index >= FSegmentsCount then
     raise ERangeError.Create('Index >= SegmentsCount');
