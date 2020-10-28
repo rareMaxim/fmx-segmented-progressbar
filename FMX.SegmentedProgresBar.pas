@@ -12,15 +12,15 @@ uses
 type
   TSegmentedProgresBar = class(TPresentedControl)
   private
-    FSegmentsCount: Integer;
-    FDefaultColor: TAlphaColor;
-    FColors: TArray<TAlphaColor>;
+    fSegmentsCount: Integer;
+    fDefaultColor: TAlphaColor;
+    fColors: TArray<TAlphaColor>;
+    fBackgroundColor: TAlphaColor;
     procedure SetSegmentsCount(const Value: Integer);
     function GetRectBySegIndex(const Index: Integer): TRect;
     function GetSegmetColor(Index: Integer): TAlphaColor;
     procedure SetSegmetColor(Index: Integer; const Value: TAlphaColor);
     procedure InitBrush(Index: Integer);
-    procedure SetDefaultColor(const Value: TAlphaColor);
   protected
     procedure Paint; override;
   public
@@ -30,12 +30,13 @@ type
     property Segmet[Index: Integer]: TAlphaColor read GetSegmetColor write SetSegmetColor; default;
   published
     property Align;
+    property DefaultColor: TAlphaColor read fDefaultColor write fDefaultColor;
+    property BackgroundColor: TAlphaColor read fBackgroundColor write fBackgroundColor;
     property Height;
-    property Width;
-    property Size;
     property Position;
-    property SegmentsCount: Integer read FSegmentsCount write SetSegmentsCount;
-    property DefaultColor: TAlphaColor read FDefaultColor write SetDefaultColor;
+    property Width;
+    property SegmentsCount: Integer read fSegmentsCount write SetSegmentsCount;
+    property Size;
   end;
 
 procedure register;
@@ -63,12 +64,13 @@ end;
 constructor TSegmentedProgresBar.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  DefaultColor := TAlphaColorRec.Bisque;
+  fDefaultColor := TAlphaColorRec.Bisque;
+  fBackgroundColor := TAlphaColorRec.Beige;
 end;
 
 procedure TSegmentedProgresBar.Clear;
 begin
-  FColors := nil;
+  fColors := nil;
 end;
 
 function TSegmentedProgresBar.GetRectBySegIndex(const Index: Integer): TRect;
@@ -84,17 +86,17 @@ end;
 
 function TSegmentedProgresBar.GetSegmetColor(Index: Integer): TAlphaColor;
 begin
-  if Index >= FSegmentsCount then
+  if Index >= fSegmentsCount then
     raise ERangeError.Create('Index >= SegmentsCount');
   InitBrush(Index);
-  Result := FColors[Index];
+  Result := fColors[Index];
   Repaint;
 end;
 
 procedure TSegmentedProgresBar.InitBrush(Index: Integer);
 begin
-  if FColors[Index] <= 0 then
-    FColors[Index] := FDefaultColor;
+  if fColors[Index] <= 0 then
+    fColors[Index] := fDefaultColor;
 end;
 
 procedure TSegmentedProgresBar.Paint;
@@ -102,31 +104,27 @@ var
   I: Integer;
 begin
   inherited;
-  for I := Low(FColors) to High(FColors) do
+  Canvas.Fill.Color := fBackgroundColor;
+  Canvas.FillRect(ClipRect, 0, 0, [], 1);
+  for I := Low(fColors) to High(fColors) do
   begin
     Canvas.Fill.Color := (GetSegmetColor(I));
     Canvas.FillRect(GetRectBySegIndex(I), 0, 0, [], 1);
   end;
 end;
 
-procedure TSegmentedProgresBar.SetDefaultColor(const Value: TAlphaColor);
-begin
-  FDefaultColor := Value;
-  Repaint;
-end;
-
 procedure TSegmentedProgresBar.SetSegmentsCount(const Value: Integer);
 begin
-  SetLength(FColors, Value);
-  FSegmentsCount := Value;
+  SetLength(fColors, Value);
+  fSegmentsCount := Value;
 end;
 
 procedure TSegmentedProgresBar.SetSegmetColor(Index: Integer; const Value: TAlphaColor);
 begin
-  if Index >= FSegmentsCount then
+  if Index >= fSegmentsCount then
     raise ERangeError.Create('Index >= SegmentsCount');
   InitBrush(Index);
-  FColors[Index] := Value;
+  fColors[Index] := Value;
   // RepaintRect(GetRectBySegIndex(Index));
   Repaint;
 end;
