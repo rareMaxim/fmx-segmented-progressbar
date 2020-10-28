@@ -8,6 +8,7 @@ object Form4: TForm4
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object lyt1: TLayout
     Padding.Left = 5.000000000000000000
@@ -54,7 +55,7 @@ object Form4: TForm4
     TabOrder = 2
     object cmbclrbx2: TComboColorBox
       Align = Right
-      Color = claSpringgreen
+      Color = claDeepskyblue
       Position.X = 224.000000000000000000
       Position.Y = 1.000000000000000000
       Size.Width = 60.000000000000000000
@@ -112,13 +113,12 @@ object Form4: TForm4
     Text = 'Start 60 task'
     OnClick = btn1Click
   end
-  object sgmntdprgrsbr1: TSegmentedProgresBar
-    Size.Width = 377.000000000000000000
-    Size.Height = 81.000000000000000000
-    Size.PlatformDefault = False
+  object Layout1: TLayout
     Position.X = 8.000000000000000000
-    Position.Y = 24.000000000000000000
-    SegmentsCount = 100
-    DefaultColor = claBisque
+    Position.Y = 8.000000000000000000
+    Size.Width = 361.000000000000000000
+    Size.Height = 105.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
   end
 end

@@ -16,7 +16,7 @@ type
     FDefaultColor: TAlphaColor;
     FColors: TArray<TAlphaColor>;
     procedure SetSegmentsCount(const Value: Integer);
-    function GetRectBySegIndex(const Index: Integer): TRectF;
+    function GetRectBySegIndex(const Index: Integer): TRect;
     function GetSegmetColor(Index: Integer): TAlphaColor;
     procedure SetSegmetColor(Index: Integer; const Value: TAlphaColor);
     procedure InitBrush(Index: Integer);
@@ -71,17 +71,15 @@ begin
   FColors := nil;
 end;
 
-function TSegmentedProgresBar.GetRectBySegIndex(const Index: Integer): TRectF;
+function TSegmentedProgresBar.GetRectBySegIndex(const Index: Integer): TRect;
 var
-  L, R, T, B: Single;
-  Width: Single;
+  lWidth: Integer;
 begin
-  Width := ClipRect.Width / SegmentsCount;
-  L := Width * Index;
-  T := ClipRect.Top;
-  B := ClipRect.Bottom;
-  R := L + Width;
-  Result.Create(L, T, R, B);
+  lWidth := Round(ClipRect.Width / SegmentsCount);
+  Result.Left := lWidth * Index;
+  Result.Top := Round(ClipRect.Top);
+  Result.Bottom := Round(ClipRect.Bottom);
+  Result.Right := Result.Left + lWidth;
 end;
 
 function TSegmentedProgresBar.GetSegmetColor(Index: Integer): TAlphaColor;
@@ -107,7 +105,7 @@ begin
   for I := Low(FColors) to High(FColors) do
   begin
     Canvas.Fill.Color := (GetSegmetColor(I));
-    Canvas.FillRect(GetRectBySegIndex(I), 1, 1, [], 1);
+    Canvas.FillRect(GetRectBySegIndex(I), 0, 0, [], 1);
   end;
 end;
 
