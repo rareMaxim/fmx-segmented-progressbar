@@ -17,7 +17,7 @@ type
     fColors: TArray<TAlphaColor>;
     fBackgroundColor: TAlphaColor;
     procedure SetSegmentsCount(const Value: Integer);
-    function GetRectBySegIndex(const Index: Integer): TRect;
+    function GetRectBySegIndex(const Index: Integer): TRectF;
     function GetSegmetColor(Index: Integer): TAlphaColor;
     procedure SetSegmetColor(Index: Integer; const Value: TAlphaColor);
     procedure InitBrush(Index: Integer);
@@ -73,14 +73,14 @@ begin
   fColors := nil;
 end;
 
-function TSegmentedProgresBar.GetRectBySegIndex(const Index: Integer): TRect;
+function TSegmentedProgresBar.GetRectBySegIndex(const Index: Integer): TRectF;
 var
-  lWidth: Integer;
+  lWidth: Single;
 begin
-  lWidth := Round(ClipRect.Width / SegmentsCount);
+  lWidth := ClipRect.Width / SegmentsCount;
   Result.Left := lWidth * Index;
-  Result.Top := Round(ClipRect.Top);
-  Result.Bottom := Round(ClipRect.Bottom);
+  Result.Top := ClipRect.Top;
+  Result.Bottom := ClipRect.Bottom;
   Result.Right := Result.Left + lWidth;
 end;
 
