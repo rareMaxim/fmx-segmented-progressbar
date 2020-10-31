@@ -64,8 +64,8 @@ end;
 constructor TSegmentedProgresBar.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  fDefaultColor := TAlphaColorRec.Bisque;
-  fBackgroundColor := TAlphaColorRec.Beige;
+  fDefaultColor := TAlphaColorRec.Null;
+  fBackgroundColor := TAlphaColorRec.Null;
 end;
 
 procedure TSegmentedProgresBar.Clear;
@@ -104,11 +104,14 @@ var
   I: Integer;
 begin
   inherited;
-  Canvas.Fill.Color := fBackgroundColor;
-  Canvas.FillRect(ClipRect, 0, 0, [], 1);
+  if fBackgroundColor <> TAlphaColorRec.Null then
+  begin
+    Canvas.Fill.Color := fBackgroundColor;
+    Canvas.FillRect(ClipRect, 0, 0, [], 1);
+  end;
   for I := Low(fColors) to High(fColors) do
   begin
-    Canvas.Fill.Color := (GetSegmetColor(I));
+    Canvas.Fill.Color := GetSegmetColor(I);
     Canvas.FillRect(GetRectBySegIndex(I), 0, 0, [], 1);
   end;
 end;
